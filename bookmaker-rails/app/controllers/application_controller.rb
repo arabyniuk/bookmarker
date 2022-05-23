@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::API
   before_action :require_login
+  before_action :set_default_format
+
+  def set_default_format
+    request.format = :json
+  end
 
   def encode_token(payload)
     JWT.encode(payload, 'my_secret')

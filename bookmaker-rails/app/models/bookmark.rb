@@ -3,6 +3,7 @@ class Bookmark
   include Mongoid::Timestamps
 
   belongs_to :user
+  embeds_many :comments
 
   field :link
   field :title

@@ -1,15 +1,20 @@
 class Api::V1::BookmarksController < ApplicationController
+  #skip_before_action :require_login, only: [:show, :index]
+
   def index
     @bookmarks = @user.bookmarks
   end
 
   def create
-    sleep 3
     @bookmark = @user.bookmarks.build(bookmark_params)
 
     unless @bookmark.save
       render json: {errors: @bookmark.errors.full_messages}, status: :not_acceptable
     end
+  end
+
+  def show
+    @bookmark = Bookmark.find(params[:id])
   end
 
   private

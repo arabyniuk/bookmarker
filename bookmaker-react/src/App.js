@@ -8,12 +8,15 @@ import Login from './features/users/Login'
 import SignUp from './features/users/SignUp'
 import Profile from './features/users/Profile'
 import BookmarksList from './features/bookmarks/BookmarksList'
-import CommentsBookmark from './features/bookmarks/CommentsBookmark'
 import { register, getProfile } from './actions/userActions'
+import { fetchBookmarks } from './actions/bookmarkActions'
 
 class App extends Component {
   componentDidMount = () => {
     this.props.getProfile()
+    if (this.props.currentUser){
+      this.props.fetchBookmarks(this.props.currentUser)
+    }
   }
 
   render() {
@@ -35,9 +38,6 @@ class App extends Component {
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/commentsBookmark/:bookmarkId">
-              <CommentsBookmark />
-            </Route>
             <Route exact path='/registration'>
               <SignUp register={this.props.register} />
             </Route>
@@ -56,6 +56,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  fetchBookmarks: (user) => dispatch(fetchBookmarks(user)),
   register: userInfo => dispatch(register(userInfo)),
   getProfile: () => dispatch(getProfile())
 })
