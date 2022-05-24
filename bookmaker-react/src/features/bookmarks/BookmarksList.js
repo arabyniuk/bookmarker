@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkAdd from './BookmarkAdd'
 import { fetchBookmarks, bookmarkAdd } from '../../actions/bookmarkActions'
+import { commentAdd } from '../../actions/commentActions'
 import { connect } from 'react-redux'
 import CommentModal from '../comments/CommentModal'
 
@@ -76,9 +77,12 @@ class BookmarksList extends Component {
             </section>
           }
         </div>
-        <CommentModal 
+        <CommentModal
           show={this.state.show} 
           handleClose={this.hideModal}
+          commentAdd={this.props.commentAdd}
+          postError={this.props.bookmarkError}
+          currentUser={this.props.currentUser}
           bookmark={this.state.bookmark}
         />
       </div>
@@ -97,6 +101,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  commentAdd: (comment) => dispatch(commentAdd(comment)),
   fetchBookmarks: (user) => dispatch(fetchBookmarks(user)),
   bookmarkAdd: (obj) => dispatch(bookmarkAdd(obj))
 })

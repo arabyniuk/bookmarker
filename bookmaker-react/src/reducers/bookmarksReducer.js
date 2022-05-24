@@ -41,6 +41,19 @@ export const bookmarksReducer = (state = initialState, action) => {
         submitting: false,
         error: state.error.concat(action.payload)
       }
+    case 'ADD_COMMENT':
+      const newBookmarks = state.bookmarks.map(bookmark => {
+        if (bookmark.id == action.payload.bookmark_id) {
+          bookmark.comments = bookmark.comments.concat(action.payload)
+          return bookmark
+        } else {
+          return bookmark
+        }
+      })
+      return {
+        ...state,
+        bookmarks: newBookmarks
+      }
     default:
       return state
   }

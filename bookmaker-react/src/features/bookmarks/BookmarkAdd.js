@@ -36,19 +36,6 @@ class BookmarkAdd extends Component {
   }
 
   render() {
-    //console.log(this.props.bookmarkError.length)
-    //if (!this.props.bookmarkSubmitting? && )
-    //  console.log('true')
-    //  :
-
-    //if (this.props.bookmarkSubmitting?) {
-    //  this.setState({
-    //    bookmark: {
-    //      link : ''
-    //    }
-    //  });
-    //}
-
     return(
       <div className="container flex mb-10 items-center">
         <div className="relative">

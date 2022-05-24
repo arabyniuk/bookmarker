@@ -8,4 +8,6 @@ class Comment
   embedded_in :comment, inverse_of: :comments
 
   field :body
+
+  validates :body, presence: true, length: { minimum: 5}
 end

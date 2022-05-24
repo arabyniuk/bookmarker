@@ -10,7 +10,7 @@ const addBookmark = (bookmark) => {
   }
 }
 
-const addBookmarkFailed = (errors) => {
+export const postBookmarkFailed = (errors) => {
   return {
     type: 'ADD_BOOKMARK_FAILED',
     payload: errors
@@ -57,7 +57,7 @@ export const bookmarkAdd = ({user, bookmark}) => {
           data.errors.map(msg => (
             error(msg)
           ))
-          dispatch(addBookmarkFailed(data.errors))
+          dispatch(postBookmarkFailed(data.errors))
         } else {
           dispatch(addBookmark(data.bookmark))
         }

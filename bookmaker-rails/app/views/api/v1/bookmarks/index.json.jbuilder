@@ -21,11 +21,11 @@ json.bookmarks @bookmarks do |bookmark|
   json.icon bookmark.icon_url
   json.created_at bookmark.created_at
 
-
   json.comments bookmark.comments do |comment|
     #handle_comments(json, comment)
     json.id comment.id.to_s
     json.body comment.body
     json.created_at comment.created_at
+    json.bookmark_id comment._parent.id.to_s
   end
 end

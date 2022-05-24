@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :index] do
         resources :bookmarks, only: [:index, :create]
       end
-      resources :bookmarks, only: [:show]
+      resources :bookmarks do
+        resource :comments, module: :bookmarks
+      end
       get '/auto_login', to: 'auth#auto_login'
     end
   end

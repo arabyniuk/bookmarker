@@ -34,7 +34,7 @@ const BookmarkCard = ({bookmark, title, icon, showModal}) => {
         </div>
       </td>
       <td className="px-5 py-3 text-xs border">
-        <div id="id1" className="m-6" onClick={toggle} style={{display: 'none',cursor: 'pointer'}}>
+        <div id="id1" className="m-6" onClick={toggle} style={{display: 'none', cursor: 'pointer'}}>
           <div className="w-16 h-8 rounded-full flex items-center justify-items-start my-1 bg-gray-600">
             <div className="absolute w-6 h-6 ml-1 rounded-full bg-white"></div>
           </div>
