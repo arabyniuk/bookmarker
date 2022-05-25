@@ -67,6 +67,7 @@ class BookmarksList extends Component {
                           bookmark={bookmark} 
                           title={bookmark.title.substring(0, 70) + ' ...'} 
                           icon={bookmark.icon}
+                          currentUser={this.props.currentUser}
                           showModal={(event) => this.showModal(event, bookmark)}
                         />
                       ))}

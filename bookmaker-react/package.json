@@ -13,6 +13,7 @@
     "react-router-dom": "^5.2.0",
     "react-s-alert": "^1.4.1",
     "react-scripts": "5.0.1",
+    "react-tooltip": "^4.2.21",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-form": "^8.3.8",

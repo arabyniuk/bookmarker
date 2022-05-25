@@ -4,6 +4,7 @@ class Bookmark
 
   belongs_to :user
   embeds_many :comments
+  embeds_many :votes
 
   field :link
   field :title

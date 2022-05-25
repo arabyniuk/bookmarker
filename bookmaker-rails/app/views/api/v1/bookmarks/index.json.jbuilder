@@ -28,4 +28,11 @@ json.bookmarks @bookmarks do |bookmark|
     json.created_at comment.created_at
     json.bookmark_id comment._parent.id.to_s
   end
+
+  json.votes bookmark.votes do |vote|
+    json.id vote.id.to_s
+    json.user_id vote.user_id.to_s
+    json.votable_id bookmark.id.to_s
+    json.vatable_type 'Bookmark'
+  end
 end

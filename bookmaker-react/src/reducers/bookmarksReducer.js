@@ -54,6 +54,19 @@ export const bookmarksReducer = (state = initialState, action) => {
         ...state,
         bookmarks: newBookmarks
       }
+    case 'UPDATE_BOOKMARK':
+      const newBookmarkList = state.bookmarks.map(bookmark => (
+        bookmark.id === action.payload.id ? action.payload : bookmark
+      ))
+      return {...state, bookmarks: newBookmarkList } 
+    case 'DELETE_BOOKMARK_VOTE':
+      return {
+        ...state,
+        bookmarks: state.bookmarks.map(bookmark => {
+          bookmark.votes = bookmark.votes.filter(vote => vote.id !== action.payload.id)
+          return bookmark
+        })
+      }
     default:
       return state
   }

@@ -17,6 +17,13 @@ export const postBookmarkFailed = (errors) => {
   }
 }
 
+export const updateBookmark = (bookmark) => {
+  return {
+    type: 'UPDATE_BOOKMARK',
+    payload: bookmark
+  }
+}
+
 export const fetchBookmarks = (user) => {
   return async dispatch => {
     const token = localStorage.token

@@ -13,7 +13,6 @@ end
 
 def iterate(json, comment)
   if comment.comments.present?
-    binding.pry
     json.array!(comment.comments) do |json, c|
       comment_line(json, c)
     end
