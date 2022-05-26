@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       end
       resources :bookmarks do
         resource :votes, module: :bookmarks
-        resource :comments, module: :bookmarks
+        resources :comments, module: :bookmarks do
+          resource :votes, module: :comments
+        end
       end
       get '/auto_login', to: 'auth#auto_login'
     end

@@ -67,6 +67,33 @@ export const bookmarksReducer = (state = initialState, action) => {
           return bookmark
         })
       }
+    case 'DELETE_COMMENT_VOTE':
+      return {
+        ...state,
+        bookmarks: state.bookmarks.map(bookmark => {
+          bookmark.comments = bookmark.comments.map(comment => {
+            comment.votes = comment.votes.filter(vote => vote.id !== action.payload.id);
+            return comment
+          })
+          return bookmark
+        })
+      }
+    case 'ADD_COMMENT_VOTE':
+      const newBookmarksList = state.bookmarks.map(bookmark => {
+        if (bookmark.id === action.payload.bookmark_id) {
+          bookmark.comments = bookmark.comments.map(comment => {
+            if (comment.id === action.payload.id) {
+              comment = action.payload
+              return comment
+            } else { return comment }
+          })
+          return bookmark
+        } else {
+          return bookmark
+        }
+      })
+
+      return {...state, bookmarks: newBookmarksList}
     default:
       return state
   }

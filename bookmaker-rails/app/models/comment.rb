@@ -7,6 +7,8 @@ class Comment
   embeds_many :comments, class_name: 'Comment'
   embedded_in :comment, inverse_of: :comments
 
+  embeds_many :votes
+
   field :body
 
   validates :body, presence: true, length: { minimum: 5}

@@ -5,4 +5,5 @@ class Vote
   belongs_to :user, inverse_of: nil
 
   embedded_in :bookmark
+  embedded_in :comment
 end

@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import CommentForm from './CommentForm'
+import LikeButton from '../../helpers/LikeButton' 
+import { format } from 'date-fns'
 import './Modal.css';
 
 class CommentModal extends Component {
@@ -36,50 +38,37 @@ class CommentModal extends Component {
 
                         {comments && comments.map(comment => (
                            <div key={comment.id} className="flex items-center space-x-2">
-                              <div className="flex flex-shrink-0 self-start cursor-pointer">
-                                <img src="https://images.unsplash.com/photo-1551122089-4e3e72477432?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cnVieXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" className="h-8 w-8 object-fill rounded-full" />
-                              </div>
-
-                              <div className="flex items-center justify-center space-x-2">
-                                <div className="block">
-                                  <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
-                                    <div className="font-medium">
-                                      <a href="#" className="hover:underline text-sm">
-                                        <small>Nirmala</small>
-                                      </a>
-                                    </div>
-                                    <div className="text-xs">
-                                      {comment.body}
-                                    </div>
+                              <div className="bg-white text-black p-4 antialiased flex max-w-lg">
+                                <img className="rounded-full h-8 w-8 mr-2 mt-1 " src="https://picsum.photos/id/1027/200/200" />
+                                <div>
+                                  <div className="bg-gray-100 rounded-3xl px-4 pt-2 pb-2.5">
+                                    <div className="font-semibold text-sm leading-relaxed">Jon Doe</div>
+                                    <div className="text-normal leading-snug md:leading-normal">{comment.body} world world</div>
                                   </div>
+
                                   <div className="flex justify-start items-center text-xs w-full">
                                     <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
-                                      <a href="#" className="hover:underline">
-                                        <small>Like</small>
-                                      </a>
-                                     <small className="self-center">.</small>
-                                      <a href="#" className="hover:underline">
-                                        <small>Reply</small>
-                                      </a>
-                                     <small className="self-center">.</small>
-                                      <a href="#" className="hover:underline">
-                                        <small>15 hour</small>
-                                      </a>
+                                      <LikeButton post={comment} currentUser={this.props.currentUser} />
+
+                                      {/*<a href="#" onClick={this.addLike} className="hover:underline">
+                                                                              <small>Like</small>
+                                                                            </a>*/}
+
+                                      <small className="self-center">.</small>
+                                      <small>{format(Date.parse(comment.created_at), "MMMM do")}</small>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
 
-                              <div className="self-stretch flex justify-center items-center transform transition-opacity duration-200 opacity-0 translate -translate-y-2 hover:opacity-100">
-                                <a href="#" className="">
-                                  <div className="text-xs cursor-pointer flex h-6 w-6 transform transition-colors duration-200 hover:bg-gray-100 rounded-full items-center justify-center">
-                                    <svg className="w-4 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+                                  <div className="bg-white border border-white rounded-full float-right -mt-8 mr-0.5 flex shadow items-center">
+                                    <svg className="p-0.5 h-5 w-5 rounded-full -ml-1.5 bg-white" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><defs><linearGradient id="a2" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stopColor="#FF6680" /><stop offset="100%" stopColor="#E61739" /></linearGradient><filter id="c2" width="118.8%" height="118.8%" x="-9.4%" y="-9.4%" filterUnits="objectBoundingBox"><feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation={1} /><feOffset dy={-1} in="shadowBlurInner1" result="shadowOffsetInner1" /><feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2={-1} k3={1} operator="arithmetic" result="shadowInnerInner1" /><feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0.710144928 0 0 0 0 0 0 0 0 0 0.117780134 0 0 0 0.349786932 0" /></filter><path id="b2" d="M8 0a8 8 0 100 16A8 8 0 008 0z" /></defs><g fill="none"><use fill="url(#a2)" xlinkHref="#b2" /><use fill="black" filter="url(#c2)" xlinkHref="#b2" /><path fill="white" d="M10.473 4C8.275 4 8 5.824 8 5.824S7.726 4 5.528 4c-2.114 0-2.73 2.222-2.472 3.41C3.736 10.55 8 12.75 8 12.75s4.265-2.2 4.945-5.34c.257-1.188-.36-3.41-2.472-3.41" /></g></svg>
+                                    <span className="text-sm ml-1 pr-1.5 text-gray-500">3</span>
                                   </div>
-                                </a>
+                                </div>
                               </div>
                             </div>
                           ))
                         }
+
                       </div>
                     </div>
                   </div>
