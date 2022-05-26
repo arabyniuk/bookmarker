@@ -24,6 +24,13 @@ export const updateBookmark = (bookmark) => {
   }
 }
 
+export const deleteBookmark = (bookmark_id) => {
+  return {
+    type: 'DELETE_BOOKMARK',
+    payload: bookmark_id
+  }
+}
+
 export const fetchBookmarks = (user) => {
   return async dispatch => {
     const token = localStorage.token
@@ -72,3 +79,24 @@ export const bookmarkAdd = ({user, bookmark}) => {
     }
   }
 }
+
+export const bookmarkDelete = (bookmark_id) => {
+  return async dispatch => {
+    const token = localStorage.token
+    if (token) {
+      const data = await fetch(`${DOMAIN}/api/v1/bookmarks/${bookmark_id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      })
+      if (data.status == 200) {
+        dispatch(deleteBookmark(bookmark_id))
+        success("Your bookmark was deleted")
+      }
+    }
+  }
+}
+

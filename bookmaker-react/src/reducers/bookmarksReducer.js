@@ -94,6 +94,11 @@ export const bookmarksReducer = (state = initialState, action) => {
       })
 
       return {...state, bookmarks: newBookmarksList}
+    case 'DELETE_BOOKMARK':
+      return {
+        ...state,
+        bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== action.payload)
+      }
     default:
       return state
   }

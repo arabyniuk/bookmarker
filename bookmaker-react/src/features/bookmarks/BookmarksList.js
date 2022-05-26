@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react'
 import BookmarkCard from './BookmarkCard'
 import BookmarkAdd from './BookmarkAdd'
-import { fetchBookmarks, bookmarkAdd } from '../../actions/bookmarkActions'
+import { fetchBookmarks, bookmarkAdd, bookmarkDelete } from '../../actions/bookmarkActions'
 import { commentAdd } from '../../actions/commentActions'
 import { connect } from 'react-redux'
 import CommentModal from '../comments/CommentModal'
@@ -68,6 +68,7 @@ class BookmarksList extends Component {
                           title={bookmark.title.substring(0, 70) + ' ...'} 
                           icon={bookmark.icon}
                           currentUser={this.props.currentUser}
+                          bookmarkDelete={this.props.bookmarkDelete}
                           showModal={(event) => this.showModal(event, bookmark)}
                         />
                       ))}
@@ -102,6 +103,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  bookmarkDelete: (id) => dispatch(bookmarkDelete(id)),
   commentAdd: (comment) => dispatch(commentAdd(comment)),
   fetchBookmarks: (user) => dispatch(fetchBookmarks(user)),
   bookmarkAdd: (obj) => dispatch(bookmarkAdd(obj))

@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import LikeButton from '../../helpers/LikeButton'
+import DeleteButton from '../../helpers/DeleteButton'
 
-const BookmarkCard = ({bookmark, title, icon, showModal, currentUser}) => {
+const BookmarkCard = ({bookmark, title, icon, showModal, currentUser, bookmarkDelete}) => {
   const toggle = () => {
     const x = document.getElementById("id1");
     const y = document.getElementById("id2");
@@ -55,9 +56,8 @@ const BookmarkCard = ({bookmark, title, icon, showModal, currentUser}) => {
 
         <LikeButton post={bookmark} currentUser={currentUser} />
 
-        <a href="">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-        </a>
+        <DeleteButton post={bookmark} bookmarkDelete={bookmarkDelete} />
+
       </td>
     </tr>
   )

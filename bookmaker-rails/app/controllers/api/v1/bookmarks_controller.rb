@@ -13,6 +13,14 @@ class Api::V1::BookmarksController < ApplicationController
     end
   end
 
+  def destroy
+    @bookmark = Bookmark.find(params[:id])
+
+    if @bookmark.destroy
+      head :ok
+    end
+  end
+
   def show
     @bookmark = Bookmark.find(params[:id])
   end
