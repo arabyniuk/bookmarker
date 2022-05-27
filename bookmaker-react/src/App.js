@@ -8,7 +8,7 @@ import Login from './features/users/Login'
 import SignUp from './features/users/SignUp'
 import Profile from './features/users/Profile'
 import BookmarksList from './features/bookmarks/BookmarksList'
-import { register, getProfile } from './actions/userActions'
+import { register, getProfile, logoutUser } from './actions/userActions'
 import { fetchBookmarks } from './actions/bookmarkActions'
 
 class App extends Component {
@@ -19,11 +19,17 @@ class App extends Component {
     }
   }
 
+  logout = () => {
+    localStorage.removeItem('token')
+    this.props.logoutUser()
+    success('Successfully logged out!')
+  }
+
   render() {
     return(
       <div>
         <Router>
-          <Header currentUser={this.props.currentUser} />
+          <Header currentUser={this.props.currentUser} logoutUser={this.logout} />
           <Switch>
             <Route exact path="/">
               {this.props.currentUser.email?
@@ -58,7 +64,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchBookmarks: (user) => dispatch(fetchBookmarks(user)),
   register: userInfo => dispatch(register(userInfo)),
-  getProfile: () => dispatch(getProfile())
+  getProfile: () => dispatch(getProfile()),
+  logoutUser: () => dispatch(logoutUser())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -51,3 +51,8 @@ export const getProfile = () => {
     }
   }
 }
+
+export const logoutUser = () => {
+  return { type: 'LOGOUT_USER' }
+}
+
