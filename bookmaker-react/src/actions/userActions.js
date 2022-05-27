@@ -56,3 +56,26 @@ export const logoutUser = () => {
   return { type: 'LOGOUT_USER' }
 }
 
+export const login = (user) => {
+  return async dispatch => {
+     dispatch({ type: 'CREATING_OR_GETTING_USER' })
+     const data = await fetch(`${DOMAIN}/api/v1/login`, {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json',
+       },
+       body: JSON.stringify(user)
+     })
+     .then(resp => resp.json())
+     .then(data => {
+       if (data.errors) {
+         console.log('errors')
+       } else {
+         localStorage.setItem('token', data.jwt)
+         dispatch(loginUser(data.user))
+       }
+     })
+
+  }
+}

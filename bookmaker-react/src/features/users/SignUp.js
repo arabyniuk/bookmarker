@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, {Component} from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
 class SignUp extends Component {
   constructor(props) {

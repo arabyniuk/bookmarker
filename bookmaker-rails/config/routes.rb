@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         end
       end
       get '/auto_login', to: 'auth#auto_login'
+      post '/login', to: "auth#login"
     end
   end
 end

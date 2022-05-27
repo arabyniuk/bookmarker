@@ -8,7 +8,7 @@ import Login from './features/users/Login'
 import SignUp from './features/users/SignUp'
 import Profile from './features/users/Profile'
 import BookmarksList from './features/bookmarks/BookmarksList'
-import { register, getProfile, logoutUser } from './actions/userActions'
+import { register, login, getProfile, logoutUser } from './actions/userActions'
 import { fetchBookmarks } from './actions/bookmarkActions'
 
 class App extends Component {
@@ -39,7 +39,7 @@ class App extends Component {
               }
             </Route>
             <Route exact path="/login">
-              <Login />
+              <Login login={this.props.login} authErrors={this.props.authErrors}/>
             </Route>
             <Route exact path="/profile">
               <Profile />
@@ -57,7 +57,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.users.currentUser
+    currentUser: state.users.currentUser,
+    authErrors: state.users.errors
   }
 }
 
@@ -65,7 +66,8 @@ const mapDispatchToProps = dispatch => ({
   fetchBookmarks: (user) => dispatch(fetchBookmarks(user)),
   register: userInfo => dispatch(register(userInfo)),
   getProfile: () => dispatch(getProfile()),
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  login: (userInfo) => dispatch(login(userInfo))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
