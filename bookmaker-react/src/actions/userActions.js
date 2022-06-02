@@ -5,6 +5,10 @@ const loginUser = userObj => ({
   payload: userObj
 })
 
+const completeLoadingProfile = () => ({
+  type: 'COMPLETE_LOADING_PROFILE'
+})
+
 export const register = (user) => {
   return dispatch => {
     return fetch(`${DOMAIN}/api/v1/users`, {
@@ -32,7 +36,7 @@ export const getProfile = () => {
     const token = localStorage.token
     if (token) {
       return fetch(`${DOMAIN}/api/v1/auto_login`, {
-        method: "GET",
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -42,11 +46,11 @@ export const getProfile = () => {
       .then(resp => resp.json())
       .then(data => {
         if (data.message) {
-          localStorage.removeItem("token")
+          localStorage.removeItem('token')
         } else {
-          //localStorage.setItem("token", data.jwt)
           dispatch(loginUser(data.user))
         }
+        dispatch(completeLoadingProfile())
       })
     }
   }

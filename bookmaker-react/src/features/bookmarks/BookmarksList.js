@@ -46,21 +46,21 @@ class BookmarksList extends Component {
     return(
       <div>
         <div className="px-16 py-6">
-          {this.props.loading?
-             <div className="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
-               <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64" className="m-auto mt-1/4" />
-             </div>
-           :
-            <section className="container mx-auto font-mono">
-              <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-                <div className="w-full overflow-x-auto">
-                  <BookmarkAdd
-                    currentUser={this.props.currentUser}
-                    bookmarkAdd={this.props.bookmarkAdd}
-                    bookmarkError={this.props.bookmarkError}
-                    bookmarkSubmitting={this.props.bookmarkSubmitting}
-                  />
+          <section className="container mx-auto font-mono">
+            <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+              <div className="w-full overflow-x-auto">
+                <BookmarkAdd
+                  currentUser={this.props.currentUser}
+                  bookmarkAdd={this.props.bookmarkAdd}
+                  bookmarkError={this.props.bookmarkError}
+                  bookmarkSubmitting={this.props.bookmarkSubmitting}
+                />
 
+                {this.props.loading?
+                   <div className="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
+                     <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64" className="m-auto mt-1/4" />
+                   </div>
+                 :
                   <table className="w-full">
                     <tbody className="bg-white">
                       {list.map(bookmark => (
@@ -76,10 +76,10 @@ class BookmarksList extends Component {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                  }
               </div>
-            </section>
-          }
+            </div>
+          </section>
         </div>
         <CommentModal
           show={this.state.show}

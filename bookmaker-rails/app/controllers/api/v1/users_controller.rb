@@ -7,7 +7,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    sleep 5
     @user = User.new(user_params)
     if @user.save
       payload = {user_id: @user.id}

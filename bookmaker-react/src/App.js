@@ -30,30 +30,38 @@ class App extends Component {
   render() {
     return(
       <div>
-        <Header currentUser={this.props.currentUser} logoutUser={this.logout} />
-        <Switch>
-          <Route exact path="/">
-            {this.props.currentUser.email?
-              <BookmarksList />
-              :
-              <Home />
-            }
-          </Route>
-          <Route exact path="/login">
-            <Login login={this.props.login} authErrors={this.props.authErrors}/>
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path='/registration'>
-            <SignUp register={this.props.register} />
-          </Route>
-          <Route>
-            <ParseBookmark bookmarkAdd={this.props.bookmarkAdd} currentUser={this.props.currentUser} />
-          </Route>
-        </Switch>
-        <Alert stack={ { limit: 3 } }/>
-        <ShowAlert />
+        {this.props.loading?
+          <div className="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
+            <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64" className="m-auto mt-1/4" />
+          </div>
+        :
+          <div>
+            <Header currentUser={this.props.currentUser} logoutUser={this.logout} />
+            <Switch>
+              <Route exact path="/">
+                {this.props.currentUser.email?
+                  <BookmarksList />
+                  :
+                  <Home />
+                }
+              </Route>
+              <Route exact path="/login">
+                <Login login={this.props.login} authErrors={this.props.authErrors}/>
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+              <Route exact path='/registration'>
+                <SignUp register={this.props.register} />
+              </Route>
+              <Route>
+                <ParseBookmark bookmarkAdd={this.props.bookmarkAdd} currentUser={this.props.currentUser} />
+              </Route>
+            </Switch>
+            <Alert stack={ { limit: 3 } }/>
+            <ShowAlert />
+          </div>
+        }
       </div>
     )
   }
@@ -61,18 +69,19 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
+    authErrors: state.users.errors,
     currentUser: state.users.currentUser,
-    authErrors: state.users.errors
+    loading: state.users.loading
   }
 }
 
 const mapDispatchToProps = dispatch => ({
+  bookmarkAdd: (obj) => dispatch(bookmarkAdd(obj)),
+  getProfile: () => dispatch(getProfile()),
   fetchBookmarks: (user) => dispatch(fetchBookmarks(user)),
   register: userInfo => dispatch(register(userInfo)),
-  getProfile: () => dispatch(getProfile()),
   logoutUser: () => dispatch(logoutUser()),
-  login: (userInfo) => dispatch(login(userInfo)),
-  bookmarkAdd: (obj) => dispatch(bookmarkAdd(obj))
+  login: (userInfo) => dispatch(login(userInfo))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
