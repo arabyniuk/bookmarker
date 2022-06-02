@@ -6,9 +6,11 @@ import { commentAdd } from '../../actions/commentActions'
 import { connect } from 'react-redux'
 import CommentModal from '../comments/CommentModal'
 
+
 class BookmarksList extends Component {
-  constructor() {
+  constructor(props) {
     super();
+
     this.state = {
       show: false,
       bookmark: {
@@ -62,10 +64,10 @@ class BookmarksList extends Component {
                   <table className="w-full">
                     <tbody className="bg-white">
                       {list.map(bookmark => (
-                        <BookmarkCard 
-                          key={bookmark.id} 
-                          bookmark={bookmark} 
-                          title={bookmark.title.substring(0, 70) + ' ...'} 
+                        <BookmarkCard
+                          key={bookmark.id}
+                          bookmark={bookmark}
+                          title={bookmark.title.substring(0, 70) + ' ...'}
                           icon={bookmark.icon}
                           currentUser={this.props.currentUser}
                           bookmarkDelete={this.props.bookmarkDelete}
@@ -80,7 +82,7 @@ class BookmarksList extends Component {
           }
         </div>
         <CommentModal
-          show={this.state.show} 
+          show={this.state.show}
           handleClose={this.hideModal}
           commentAdd={this.props.commentAdd}
           postError={this.props.bookmarkError}

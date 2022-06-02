@@ -5,23 +5,6 @@ import LikeButton from '../../helpers/LikeButton'
 import DeleteButton from '../../helpers/DeleteButton'
 
 const BookmarkCard = ({bookmark, title, icon, showModal, currentUser, bookmarkDelete}) => {
-  const toggle = () => {
-    const x = document.getElementById("id1");
-    const y = document.getElementById("id2");
-
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-
-    if (y.style.display === "none") {
-      y.style.display = "block";
-    } else {
-      y.style.display = "none";
-    }
-  }
-
   return(
     <tr className="text-gray-700">
       <td className="px-5 py-3 border">
@@ -35,19 +18,6 @@ const BookmarkCard = ({bookmark, title, icon, showModal, currentUser, bookmarkDe
           </div>
         </div>
       </td>
-      <td className="px-5 py-3 text-xs border">
-        <div id="id1" className="m-6" onClick={toggle} style={{display: 'none', cursor: 'pointer'}}>
-          <div className="w-16 h-8 rounded-full flex items-center justify-items-start my-1 bg-gray-600">
-            <div className="absolute w-6 h-6 ml-1 rounded-full bg-white"></div>
-          </div>
-        </div>
-
-        <div id="id2" className="m-6" onClick={toggle} style={{cursor: 'pointer'}}>
-          <div className="w-16 h-8 rounded-full flex items-center my-1" style={{backgroundColor: 'rgba(29, 78, 216)'}}>
-            <div className="w-6 h-6 ml-auto mr-1 rounded-full bg-white"></div>
-          </div>
-        </div>
-      </td>
       <td className="px-5 py-3 text-sm border">{format(Date.parse(bookmark.created_at), "MMMM do, yyyy")}</td>
       <td className="px-5 py-3 text-sm border">
         <a href="" onClick={showModal}>
@@ -57,7 +27,6 @@ const BookmarkCard = ({bookmark, title, icon, showModal, currentUser, bookmarkDe
         <LikeButton post={bookmark} currentUser={currentUser} />
 
         <DeleteButton post={bookmark} bookmarkDelete={bookmarkDelete} />
-
       </td>
     </tr>
   )
