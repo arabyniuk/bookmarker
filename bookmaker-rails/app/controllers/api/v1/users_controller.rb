@@ -9,8 +9,7 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      payload = {user_id: @user.id}
-      @token = encode_token(payload)
+      @token = JsonWebToken.encode(sub: @user.id.to_s)
     else
       render json: {errors: @user.errors.full_messages}, status: :not_acceptable
     end

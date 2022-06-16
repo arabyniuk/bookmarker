@@ -6,11 +6,6 @@ class ApplicationController < ActionController::API
     request.format = :json
   end
 
-  def encode_token(payload)
-    JWT.encode(payload, 'my_secret')
-  end
-
-
   def auth_header
     request.headers['Authorization']
   end
@@ -19,7 +14,7 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, 'my_secret', true, algorithm: 'HS256')
+        JsonWebToken.decode(token)
       rescue JWT::DecodeError
         nil
       end
@@ -29,7 +24,7 @@ class ApplicationController < ActionController::API
   def current_user
     if decoded_token
       puts decoded_token.class
-      user_id = decoded_token[0]['user_id']["$oid"]
+      user_id = decoded_token['sub']
       @user = User.find_by(id: user_id)
     end
   end
