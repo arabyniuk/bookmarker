@@ -52,6 +52,8 @@ export const getProfile = () => {
         }
         dispatch(completeLoadingProfile())
       })
+    } else {
+      dispatch(completeLoadingProfile())
     }
   }
 }

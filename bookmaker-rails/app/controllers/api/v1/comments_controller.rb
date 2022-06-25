@@ -1,6 +1,5 @@
 class Api::V1::CommentsController < ApplicationController
   def create
-    sleep 3
     @comment = @bookmark.comments.build(comment_params)
     @comment.user = current_user
 

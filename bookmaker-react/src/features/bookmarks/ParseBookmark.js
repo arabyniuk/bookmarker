@@ -6,8 +6,9 @@ const ParseBookmark = ({bookmarkAdd, currentUser}) => {
 
   const handlePathname = () => {
   	try {
-      const url = new URL(window.location.pathname)
-      this.props.bookmarkAdd({user: this.props.currentUser, bookmark: {bookmark: {link: url.href}}})
+      const url = new URL(window.location.pathname.substring(1))
+      bookmarkAdd({user: currentUser, bookmark: {link: url.href}})
+      history.push("/")
     } catch (e) {
       history.push("/", { error_msg: 'Path is wrong!' })
     }

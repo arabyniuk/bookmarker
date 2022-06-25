@@ -25,6 +25,7 @@ json.bookmarks @bookmarks do |bookmark|
     #handle_comments(json, comment)
     json.id comment.id.to_s
     json.body comment.body
+    json.name comment.user.name
     json.created_at comment.created_at
     json.bookmark_id comment._parent.id.to_s
 
