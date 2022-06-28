@@ -8,8 +8,10 @@ class Api::V1::BookmarksController < ApplicationController
   def create
     @bookmark = @user.bookmarks.build(bookmark_params)
 
-    unless @bookmark.save
-      render json: {errors: @bookmark.errors.full_messages}, status: :not_acceptable
+    if @bookmark.save
+      render status: :created
+    else
+      render json: {errors: @bookmark.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -17,7 +19,7 @@ class Api::V1::BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
 
     if @bookmark.destroy
-      head :ok
+      head :no_content
     end
   end
 

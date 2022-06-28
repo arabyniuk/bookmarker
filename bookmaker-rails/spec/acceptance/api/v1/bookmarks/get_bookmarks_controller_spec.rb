@@ -13,8 +13,11 @@ describe 'get user bookmarks', type: :request do
     get "/api/v1/users/#{user.id}/bookmarks", headers: {'Authorization' => "Bearer #{JsonWebToken.encode(sub: user.id.to_s)}"}
   end
 
-  it "get user's bookmarks" do
-    #TODO check if bookmarks exists
+  it "returns all user's bookmarks" do
     expect(JSON.parse(response.body).fetch('bookmarks', '').size).to eq(2)
+  end
+
+  it "returns status code 200" do
+    expect(response).to have_http_status(:success)
   end
 end

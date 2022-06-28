@@ -8,7 +8,8 @@ describe 'delete user bookmark', type: :request do
     delete "/api/v1/bookmarks/#{bookmark.id}", headers: {'Authorization' => "Bearer #{JsonWebToken.encode(sub: user.id.to_s)}"}
   end
 
-  it "delete user bookmark" do
-    expect(user.reload.bookmarks.size).to eq(0)
+  it "returns status code 204" do
+    #expect(user.reload.bookmarks.size).to eq(0)
+    expect(response).to have_http_status(204)
   end
 end
