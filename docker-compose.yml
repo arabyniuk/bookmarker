@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  front:
+    build: ./front
+    container_name: bookmarker_front
+    restart: unless-stopped
+    command: npm run start
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./front/src:/usr/src/app/src
+
+  backend:
+    build: ./backend
+    container_name: bookmarker_backend
+    command: bundle exec rails s -b 0.0.0.0
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URL=mongodb://db:27017/api
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_api:/data/db
+
+volumes:
+  mongodb_api:

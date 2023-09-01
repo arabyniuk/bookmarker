@@ -26,7 +26,8 @@ ENV BUNDLE_PATH /gems
 RUN yarn install
 RUN bundle install
 
-ENTRYPOINT ["bin/rails"]
-CMD ["s", "-b", "0.0.0.0"]
+#EXPOSE 3000
 
-EXPOSE 3000
+#RUN ["chmod", "+x", "./docker-entrypoint.sh"]
+
+#ENTRYPOINT ["./docker-entrypoint.sh"]

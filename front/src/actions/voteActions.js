@@ -1,6 +1,6 @@
 import { updateBookmark } from "./bookmarkActions"
 
-const DOMAIN = "http://localhost:3000"
+const DOMAIN = "http://0.0.0.0:3001"
 
 const deleteBookmarkVote = (vote) => {
   return {
