@@ -31,7 +31,7 @@ class Header extends Component {
               <Fragment>
                 <div className="flex justify-center">
                   <div className="relative">
-                    <button className="block h-12 w-12 rounded-full overflow-hidden focus:outline-none" onClick={this.toggleDropdown}>
+                    <button className="block h-10 w-10 rounded-full overflow-hidden focus:outline-none" onClick={this.toggleDropdown}>
                       <img className="h-full w-full object-cover" src={`https://eu.ui-avatars.com/api/?name=${this.props.currentUser.name}&size=1000`} alt="avatar" />
                     </button>
                     <div id="header-menu-dropdown" className="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl hidden"> 
