@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import { useHistory } from 'react-router-dom'
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 const ParseBookmark = ({bookmarkAdd, currentUser}) => {
   let history = useHistory()
@@ -21,4 +21,4 @@ const ParseBookmark = ({bookmarkAdd, currentUser}) => {
   )
 }
 
-export default ParseBookmark
+export default ParseBookmark;

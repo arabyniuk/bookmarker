@@ -34,6 +34,6 @@ class ApplicationController < ActionController::API
   end
 
   def require_login
-    #render json: {message: 'Please Login or Sign up to see content'}, status: :unauthorized unless logged_in?
+    render json: {message: 'Please Login or Sign up to see content'}, status: :unauthorized unless logged_in?
   end
 end

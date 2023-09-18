@@ -17,14 +17,14 @@ export const bookmarksReducer = (state = initialState, action) => {
     case 'FETCH_BOOKMARKS_FULFILLED':
       return {
         ...state,
-        bookmarks: state.bookmarks.concat(action.payload),
+        bookmarks: [...state.bookmarks, ...action.payload],
         loading: false,
         error: []
       }
     case 'ADD_BOOKMARK':
       return {
         ...state,
-        bookmarks: state.bookmarks.concat(action.payload),
+        bookmarks: [...state.bookmarks, action.payload],
         submitting: false,
         error: []
       }
@@ -39,15 +39,15 @@ export const bookmarksReducer = (state = initialState, action) => {
         ...state,
         bookmarks: [...state.bookmarks],
         submitting: false,
-        error: state.error.concat(action.payload)
+        error: [...state.error, action.payload]
       }
     case 'ADD_COMMENT':
       const newBookmarks = state.bookmarks.map(bookmark => {
-        if (bookmark.id == action.payload.bookmark_id) {
+        if (bookmark.id === action.payload.bookmark_id) {
           bookmark.comments = bookmark.comments.concat(action.payload)
-          return bookmark
+          return bookmark;
         } else {
-          return bookmark
+          return bookmark;
         }
       })
       return {
@@ -64,7 +64,7 @@ export const bookmarksReducer = (state = initialState, action) => {
         ...state,
         bookmarks: state.bookmarks.map(bookmark => {
           bookmark.votes = bookmark.votes.filter(vote => vote.id !== action.payload.id)
-          return bookmark
+          return bookmark;
         })
       }
     case 'DELETE_COMMENT_VOTE':
@@ -73,9 +73,9 @@ export const bookmarksReducer = (state = initialState, action) => {
         bookmarks: state.bookmarks.map(bookmark => {
           bookmark.comments = bookmark.comments.map(comment => {
             comment.votes = comment.votes.filter(vote => vote.id !== action.payload.id);
-            return comment
+            return comment;
           })
-          return bookmark
+          return bookmark;
         })
       }
     case 'ADD_COMMENT_VOTE':
@@ -100,6 +100,6 @@ export const bookmarksReducer = (state = initialState, action) => {
         bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== action.payload)
       }
     default:
-      return state
+      return state;
   }
 }

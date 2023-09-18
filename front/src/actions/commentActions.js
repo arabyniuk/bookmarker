@@ -1,5 +1,5 @@
-import { error, success, warning } from "../helpers/notifications"
-import { postBookmarkFailed } from './bookmarkActions'
+import { error } from "../helpers/notifications";
+import { postBookmarkFailed } from "./bookmarkActions";
 
 const DOMAIN = "http://0.0.0.0:3001"
 

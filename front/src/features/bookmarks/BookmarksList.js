@@ -1,11 +1,10 @@
-import React, { Component, useEffect, useState } from 'react'
-import BookmarkCard from './BookmarkCard'
-import BookmarkAdd from './BookmarkAdd'
-import { fetchBookmarks, bookmarkAdd, bookmarkDelete } from '../../actions/bookmarkActions'
-import { commentAdd } from '../../actions/commentActions'
-import { connect } from 'react-redux'
-import CommentModal from '../comments/CommentModal'
-
+import React, { Component } from "react";
+import BookmarkCard from "./BookmarkCard";
+import BookmarkAdd from "./BookmarkAdd";
+import { fetchBookmarks, bookmarkAdd, bookmarkDelete } from "../../actions/bookmarkActions";
+import { commentAdd } from "../../actions/commentActions";
+import { connect } from "react-redux";
+import CommentModal from "../comments/CommentModal";
 
 class BookmarksList extends Component {
   constructor(props) {
@@ -36,7 +35,6 @@ class BookmarksList extends Component {
   }
 
   //componentDidMount = () => {
-  //  console.log('---time---')
   //  this.props.fetchBookmarks(this.props.currentUser)
   //}
 
@@ -58,7 +56,13 @@ class BookmarksList extends Component {
 
                 {this.props.loading?
                    <div className="z-50 static flex fixed left-0 top-0 bottom-0 w-full bg-gray-400 bg-opacity-50">
-                     <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64" className="m-auto mt-1/4" />
+                     <img 
+                       src="https://paladins-draft.com/img/circle_loading.gif" 
+                       width="64" 
+                       height="64" 
+                       className="m-auto mt-1/4"
+                       alt="loading..."
+                      />
                    </div>
                  :
                   <table className="w-full">

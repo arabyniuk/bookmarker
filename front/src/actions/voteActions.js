@@ -1,4 +1,4 @@
-import { updateBookmark } from "./bookmarkActions"
+import { updateBookmark } from "./bookmarkActions";
 
 const DOMAIN = "http://0.0.0.0:3001"
 

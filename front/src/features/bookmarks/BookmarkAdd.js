@@ -1,65 +1,45 @@
-import React, {Component} from 'react'
+import React, { useState } from 'react';
 
-class BookmarkAdd extends Component {
-  constructor(props) {
-    super(props)
+const BookmarkAdd = ({ currentUser, bookmarkAdd, bookmarkSubmitting }) => {
+  const [bookmark, setBookmark] = useState({ link: '' });
 
-    this.state = {
-      bookmark: {
-        link: ''
-      }
-    }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setBookmark({ ...bookmark, [name]: value });
+  };
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    bookmarkAdd({ user: currentUser, bookmark });
 
-  handleInputChange = (event) => {
-    this.setState({
-      ...this.state,
-      bookmark: {
-        ...this.state.bookmark,
-        [event.target.name]: event.target.value
-      }
-    })
-  }
+    setBookmark({ link: '' });
+  };
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.bookmarkAdd({user: this.props.currentUser, bookmark: this.state.bookmark})
-
-    this.setState({
-      bookmark: {
-        link : ''
-      }
-    });
-  }
-
-  render() {
-    return(
-      <div className="container flex mb-10 items-center">
-        <div className="relative">
-          <form onSubmit={this.handleSubmit}>
-            <div className="absolute top-4 left-3">
-              <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
-            </div>
-            <input
-              name="link"
-              type="text"
-              value={this.state.bookmark.link}
-              onChange={this.handleInputChange}
-              className="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
-              placeholder="Put link here.."
-              readOnly={this.props.bookmarkSubmitting? true : false}
-            />
-            <div className="absolute top-2 right-2">
-              <button className="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600">{this.props.bookmarkSubmitting? '...' : 'Add'}</button>
-            </div>
-          </form>
-        </div>
+  return (
+    <div className="container flex mb-10 items-center">
+      <div className="relative">
+        <form onSubmit={handleSubmit}>
+          <div className="absolute top-4 left-3">
+            <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+          </div>
+          <input
+            name="link"
+            type="text"
+            value={bookmark.link}
+            onChange={handleInputChange}
+            className="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
+            placeholder="Put link here.."
+            readOnly={bookmarkSubmitting ? true : false}
+          />
+          <div className="absolute top-2 right-2">
+            <button className="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600">
+              {bookmarkSubmitting ? '...' : 'Add'}
+            </button>
+          </div>
+        </form>
       </div>
-    )
-  }
-}
+    </div>
+  );
+};
 
-export default BookmarkAdd
+export default BookmarkAdd;

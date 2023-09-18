@@ -1,5 +1,4 @@
-import { error, success, warning } from "../helpers/notifications"
-import { reset, reduxForm } from "redux-form";
+import { error, success } from "../helpers/notifications";
 
 const DOMAIN = "http://0.0.0.0:3001"
 
@@ -92,7 +91,7 @@ export const bookmarkDelete = (bookmark_id) => {
           'Authorization': `Bearer ${token}`
         },
       })
-      if (data.status == 200) {
+      if (data.status === 200) {
         dispatch(deleteBookmark(bookmark_id))
         success("Your bookmark was deleted")
       }

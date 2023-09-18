@@ -1,4 +1,4 @@
-const DOMAIN = "http://0.0.0.0:3001"
+const DOMAIN = "http://0.0.0.0:3001";
 
 const loginUser = userObj => ({
   type: 'LOGIN_USER',
@@ -65,7 +65,7 @@ export const logoutUser = () => {
 export const login = (user) => {
   return async dispatch => {
      dispatch({ type: 'CREATING_OR_GETTING_USER' })
-     const data = await fetch(`${DOMAIN}/api/v1/login`, {
+     await fetch(`${DOMAIN}/api/v1/login`, {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
@@ -82,6 +82,5 @@ export const login = (user) => {
          dispatch(loginUser(data.user))
        }
      })
-
   }
 }

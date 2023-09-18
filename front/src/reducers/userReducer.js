@@ -1,8 +1,8 @@
 const initialState = {
-    all: [],
-    currentUser: {},
-    errors: [],
-    loading: true
+  all: [],
+  currentUser: {},
+  errors: [],
+  loading: true
 }
 
 export const userReducer = (state = initialState, action) => {
